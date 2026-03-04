@@ -104,7 +104,10 @@ class CourseSearchTool(Tool):
             source = course_title
             if lesson_num is not None:
                 source += f" - Lesson {lesson_num}"
-            sources.append(source)
+            lesson_link = None
+            if lesson_num is not None:
+                lesson_link = self.store.get_lesson_link(course_title, lesson_num)
+            sources.append(f"{source}|{lesson_link}" if lesson_link else source)
             
             formatted.append(f"{header}\n{doc}")
         
