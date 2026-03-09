@@ -453,18 +453,23 @@ header h1 {
 
 /* New Chat Button */
 .new-chat-button {
+    display: block;
     width: 100%;
     padding: 0.5rem 0;
     background: none;
     border: none;
+    appearance: none;
+    -webkit-appearance: none;
     color: var(--text-secondary);
     font-size: 0.875rem;
     font-weight: 600;
+    font-family: inherit;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
     text-align: left;
     transition: color 0.2s ease;
+    outline: none;
 }
 
 .new-chat-button:hover {
