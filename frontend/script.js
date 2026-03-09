@@ -5,7 +5,25 @@ const API_URL = '/api';
 let currentSessionId = null;
 
 // DOM elements
-let chatMessages, chatInput, sendButton, totalCourses, courseTitles, newChatButton;
+let chatMessages, chatInput, sendButton, totalCourses, courseTitles, newChatButton, themeToggle;
+
+// Theme management
+function initTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) {
+        document.body.setAttribute('data-theme', saved);
+    }
+}
+
+function toggleTheme() {
+    const current = document.body.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    document.body.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+}
+
+// Apply saved theme immediately to avoid flash
+initTheme();
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     totalCourses = document.getElementById('totalCourses');
     courseTitles = document.getElementById('courseTitles');
     newChatButton = document.getElementById('newChatButton');
-    
+    themeToggle = document.getElementById('themeToggle');
+
     setupEventListeners();
     createNewSession();
     loadCourseStats();
@@ -24,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Event Listeners
 function setupEventListeners() {
+    // Theme toggle
+    themeToggle.addEventListener('click', toggleTheme);
+
     // Chat functionality
     sendButton.addEventListener('click', sendMessage);
     chatInput.addEventListener('keypress', (e) => {
